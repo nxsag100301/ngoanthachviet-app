@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home, Welcome } from '../screens';
+import { Welcome } from '../screens';
 import BottomTab from './BottomTab';
 
 export const navigationRef = createRef();

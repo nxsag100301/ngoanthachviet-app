@@ -93,13 +93,13 @@ export const Sizes = {
   padding: parseSize(10),
   paddingSmall: parseSize(7),
   margin: parseSize(10),
-  radius: parseSize(10),
+  radius: parseSize(8),
   border: parseSize(1),
 
   //new app
-  paddingHeight: parseSizeHeight(16),
+  paddingHeight: parseSizeHeight(24),
   paddingWidth: parseSizeWidth(16),
-  marginHeight: parseSizeHeight(16),
+  marginHeight: parseSizeHeight(24),
   marginWidth: parseSizeWidth(16),
 
   //new text
@@ -138,14 +138,14 @@ export const Sizes = {
   spacing_8_Height: parseSizeHeight(48),
   spacing_9_Width: parseSizeWidth(64),
   spacing_9_Height: parseSizeHeight(64),
-  header_logo_Width: parseSizeWidth(50),
-  header_logo_Height: parseSizeHeight(50),
+  header_logo_Width: parseSizeWidth(84),
+  header_logo_Height: parseSizeHeight(49),
   heightLine_Width: parseSizeWidth(2),
   heightLine_Height: parseSizeHeight(2),
-  input_Width: parseSizeWidth(50),
-  input_Height: parseSizeHeight(50),
-  input_radius_Width: parseSizeWidth(8),
-  input_radius_Height: parseSizeHeight(8),
+  input_Width: parseSizeWidth(361),
+  input_Height: parseSizeHeight(46),
+  input_radius_Width: parseSizeWidth(12),
+  input_radius_Height: parseSizeHeight(12),
 };
 
 export const FontStyles = {
