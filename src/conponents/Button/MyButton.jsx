@@ -8,11 +8,35 @@ import {
   Sizes,
 } from '../../theme';
 
-const MyButton = ({ backgroundColor, label, labelColor, startIcon }) => {
+const MyButton = ({
+  variant,
+  backgroundColor,
+  label,
+  labelColor = 'black',
+  startIcon,
+  disabled = false,
+}) => {
   return (
-    <TouchableOpacity style={[styles.container, { backgroundColor }]}>
+    <TouchableOpacity
+      disabled={disabled}
+      style={[
+        variant === 'outline'
+          ? [styles.containerOutline, { borderColor: backgroundColor }]
+          : [styles.containerDefault, { backgroundColor }],
+        disabled && styles.disabled,
+      ]}
+    >
       {startIcon && <Image source={startIcon} style={styles.startIcon} />}
-      <Text style={[label, { color: labelColor }]}>{label}</Text>
+      <Text
+        style={[
+          styles.label,
+          {
+            color: variant === 'outline' ? backgroundColor : labelColor,
+          },
+        ]}
+      >
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -20,7 +44,7 @@ const MyButton = ({ backgroundColor, label, labelColor, startIcon }) => {
 export default MyButton;
 
 const styles = StyleSheet.create({
-  container: {
+  containerDefault: {
     height: parseSizeHeight(40),
     borderRadius: Sizes.radius,
     display: 'flex',
@@ -31,8 +55,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: parseSizeWidth(12),
     paddingVertical: parseSizeHeight(8),
   },
+  containerOutline: {
+    height: parseSizeHeight(40),
+    borderRadius: Sizes.radius,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    gap: parseSizeWidth(6),
+    paddingHorizontal: parseSizeWidth(12),
+    paddingVertical: parseSizeHeight(8),
+  },
   label: {
-    color: 'black',
     fontFamily: FontStyles.InterRegular,
     fontSize: Sizes.text_subtitle2,
     lineHeight: parseSize(22),
@@ -42,5 +77,8 @@ const styles = StyleSheet.create({
   startIcon: {
     width: parseSizeWidth(24),
     height: parseSizeHeight(24),
+  },
+  disabled: {
+    opacity: 0.5,
   },
 });
