@@ -153,4 +153,5 @@ export const FontStyles = {
   InterMedium: 'Inter-Medium',
   InterSemiBold: 'Inter-SemiBold',
   InterBold: 'Inter-Bold',
+  PenumbraBold: 'UTM-PenumbraBold',
 };

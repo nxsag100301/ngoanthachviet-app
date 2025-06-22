@@ -1,13 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { MyButton, MyTextInput } from '../../conponents';
+import { Colors, Sizes } from '../../theme';
 
 const Index = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text onPress={() => navigation.navigate('welcome')}>Go to welcome</Text>
+      <Text style={styles.test}>Home Screen</Text>
+      <MyTextInput
+        placeholder="Tìm kiếm"
+        endIcon={require('../../assets/icons/search.png')}
+      />
+      <MyButton
+        label="Liên hệ ngay"
+        labelColor={Colors.primary_900}
+        backgroundColor={Colors.primary_50}
+        startIcon={require('../../assets/icons/phone.png')}
+      />
     </View>
   );
 };
@@ -19,5 +27,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: Sizes.paddingWidth,
+  },
+  test: {
+    marginBottom: 20,
   },
 });
