@@ -15,15 +15,20 @@ const MyButton = ({
   labelColor = 'black',
   startIcon,
   disabled = false,
+  style,
+  labelStyle,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       disabled={disabled}
       style={[
         variant === 'outline'
           ? [styles.containerOutline, { borderColor: backgroundColor }]
           : [styles.containerDefault, { backgroundColor }],
         disabled && styles.disabled,
+        style,
       ]}
     >
       {startIcon && <Image source={startIcon} style={styles.startIcon} />}
@@ -33,6 +38,7 @@ const MyButton = ({
           {
             color: variant === 'outline' ? backgroundColor : labelColor,
           },
+          labelStyle,
         ]}
       >
         {label}
@@ -45,7 +51,6 @@ export default MyButton;
 
 const styles = StyleSheet.create({
   containerDefault: {
-    height: parseSizeHeight(40),
     borderRadius: Sizes.radius,
     display: 'flex',
     flexDirection: 'row',
@@ -53,10 +58,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: parseSizeWidth(6),
     paddingHorizontal: parseSizeWidth(12),
-    paddingVertical: parseSizeHeight(8),
+    paddingVertical: parseSizeHeight(6),
   },
   containerOutline: {
-    height: parseSizeHeight(40),
     borderRadius: Sizes.radius,
     display: 'flex',
     flexDirection: 'row',
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     paddingVertical: parseSizeHeight(8),
   },
   label: {
-    fontFamily: FontStyles.InterRegular,
+    fontFamily: FontStyles.InterMedium,
     fontSize: Sizes.text_subtitle2,
     lineHeight: parseSize(22),
     letterSpacing: 0.15,

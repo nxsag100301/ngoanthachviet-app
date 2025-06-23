@@ -36,6 +36,14 @@
     {
       "path": "src/assets/fonts/Inter-Thin.ttf",
       "sha1": "757805e615c974756646e54ceff8e409d5c47207"
+    },
+    {
+      "path": "src/assets/fonts/UTM-Aquarelle.ttf",
+      "sha1": "3025cf549b862f6c8374b166fa2c37326aec85b5"
+    },
+    {
+      "path": "src/assets/fonts/UTM-PenumbraBold.ttf",
+      "sha1": "e8286c2d2bb0ddf9309dc2508773f17084ac6b2c"
     }
   ]
 }

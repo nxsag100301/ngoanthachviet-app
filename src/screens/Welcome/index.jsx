@@ -7,7 +7,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Colors, parseSize, parseSizeHeight, Sizes } from '../../theme';
+import {
+  Colors,
+  FontStyles,
+  parseSize,
+  parseSizeHeight,
+  Sizes,
+} from '../../theme';
 
 const Index = () => {
   const navigation = useNavigation();
@@ -60,12 +66,14 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     textTransform: 'uppercase',
     color: 'black',
+    fontFamily: FontStyles.PenumbraBold,
   },
   suisekiTitle: {
     fontSize: Sizes.text_h3,
     lineHeight: parseSize(40),
     fontWeight: 700,
     color: Colors.primary_600,
+    fontFamily: FontStyles.PenumbraBold,
   },
   buttonStart: {
     height: parseSizeHeight(48),

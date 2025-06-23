@@ -149,7 +149,7 @@ export const Sizes = {
 };
 
 export const FontStyles = {
-  InterRegular: 'Inter-Light',
+  InterLight: 'Inter-Light',
   InterMedium: 'Inter-Medium',
   InterSemiBold: 'Inter-SemiBold',
   InterBold: 'Inter-Bold',
