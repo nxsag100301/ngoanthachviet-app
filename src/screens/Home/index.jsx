@@ -4,34 +4,35 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../theme';
 import HeaderHome from './Section/HeaderHome';
 import ProductSection from './Section/ProductSection';
 import { ProductCard } from '../../conponents';
+import React from 'react';
+import IntroduceCarousel from './components/IntroduceCarousel';
 
 const Index = () => {
-  const data = [
-    {
-      id: 1,
-      title: 'Nghệ thuật đá Suiseki',
-      description:
-        'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-    },
-    {
-      id: 2,
-      title: 'Nghệ thuật đá Suiseki',
-      description:
-        'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-    },
-    {
-      id: 3,
-      title: 'Nghệ thuật đá Suiseki',
-      description:
-        'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     title: 'Nghệ thuật đá Suiseki',
+  //     description:
+  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Nghệ thuật đá Suiseki',
+  //     description:
+  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Nghệ thuật đá Suiseki',
+  //     description:
+  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
+  //   },
+  // ];
 
   return (
     <FlatList
@@ -45,6 +46,7 @@ const Index = () => {
       ListHeaderComponent={
         <>
           <HeaderHome />
+          <IntroduceCarousel />
           <ProductSection />
           <Text style={styles.auctionTitle}>Đấu giá</Text>
         </>
@@ -65,12 +67,6 @@ export default Index;
 
 const styles = StyleSheet.create({
   contentContainer: {},
-  navBar: {
-    height: parseSizeHeight(159),
-    backgroundColor: Colors.primary_900,
-    position: 'relative',
-    paddingVertical: parseSizeHeight(24),
-  },
   renderContent: {
     display: 'flex',
     paddingHorizontal: 16,

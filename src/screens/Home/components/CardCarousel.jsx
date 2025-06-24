@@ -1,14 +1,10 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { parseSize, parseSizeHeight, Sizes } from '../../../theme';
 
-const CardCarousel = ({ title, description }) => {
+const CardCarousel = ({ title, description, image }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../assets/images/rock.png')}
-        resizeMode="cover"
-        style={styles.image}
-      />
+      <Image source={image} resizeMode="cover" style={styles.image} />
       <ImageBackground
         source={require('../../../assets/images/background-gradient.png')}
         style={styles.overlay}
@@ -37,7 +33,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject, // chiếm toàn bộ View cha
+    ...StyleSheet.absoluteFillObject,
     zIndex: 1,
     padding: parseSize(16),
     justifyContent: 'flex-end',

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../theme';
 import MyButton from '../Button/MyButton';
@@ -6,7 +6,7 @@ import AuctionTime from '../AuctionTime/AuctionTime';
 
 const ProductCard = ({ productInfo, style, auctionTime }) => {
   return (
-    <View style={[styles.container, style]}>
+    <TouchableOpacity style={[styles.container, style]}>
       <Image
         source={require('../../assets/icons/shield-checked.png')}
         style={styles.shieldChecked}
@@ -41,7 +41,7 @@ const ProductCard = ({ productInfo, style, auctionTime }) => {
           style={styles.button}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
