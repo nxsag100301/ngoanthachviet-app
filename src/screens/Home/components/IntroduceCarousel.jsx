@@ -8,65 +8,35 @@ import {
   Width,
 } from '../../../theme';
 import CardCarousel from './CardCarousel';
-import { useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
+import { interpolate } from 'react-native-reanimated';
 
-const data = [
-  {
-    id: 1,
-    title: 'Ngoạn Thạch Việt',
-    description:
-      'Hội tụ những người đam mê nghệ thuật đá Suiseki và sưu tầm đá cảnh tại Việt Nam.',
-    image: require('../../../assets/images/program.jpg'),
-  },
-  {
-    id: 2,
-    title: 'Nghệ thuật đá Suiseki',
-    description:
-      'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-    image: require('../../../assets/images/rock.png'),
-  },
-  {
-    id: 3,
-    title: 'Vẻ đẹp tự nhiên',
-    description:
-      'Đá Suiseki tác phẩm nghệ thuật từ thiên nhiên, mang trong mình vẻ đẹp nguyên bản',
-    image: require('../../../assets/images/rock3.jpg'),
-  },
-];
-
-const IntroduceCarousel = () => {
+const IntroduceCarousel = ({ data }) => {
   const ref = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(1);
   const progress = useSharedValue(1);
 
-  const onPressPagination = index => {
-    ref.current?.scrollTo({
-      /**
-       * Calculate the difference between the current index and the target index
-       * to ensure that the carousel scrolls to the nearest index
-       */
-      count: index - progress.value,
-      animated: true,
-    });
-  };
+  const animationStyle = useCallback(value => {
+    'worklet';
+
+    const zIndex = interpolate(value, [-1, 0, 1], [10, 20, 30]);
+    const rotateZ = `${interpolate(value, [-1, 0, 1], [-4, 0, 4])}deg`;
+    const translateX = interpolate(
+      value,
+      [-1, 0, 1],
+      [-Width * 0.7, 0, Width * 0.7],
+    );
+
+    return {
+      transform: [{ rotateZ }, { translateX }],
+      zIndex,
+    };
+  }, []);
 
   const renderItem = ({ item, index }) => {
-    let transformStyle = {};
-    // if (index === progress.value - 1 || index === progress.value + 2) {
-    //   transformStyle = {
-    //     transform: [{ rotateZ: '-4deg' }],
-    //     marginTop: 10,
-    //   };
-    // } else if (index === progress.value + 1 || index === progress.value - 2) {
-    //   transformStyle = {
-    //     transform: [{ rotateZ: '4deg' }],
-    //     marginTop: 10,
-    //   };
-    // }
-
     return (
-      <View style={[styles.mainContent, transformStyle]} key={index}>
+      <View style={styles.mainContent} key={index}>
         <CardCarousel
           title={item.title}
           description={item.description}
@@ -94,31 +64,22 @@ const IntroduceCarousel = () => {
           data={data}
           pagingEnabled={true}
           snapEnabled={true}
-          mode="parallax"
-          modeConfig={{
-            parallaxScrollingScale: 1,
-            parallaxScrollingOffset: 120,
-            parallaxAdjacentItemScale: 1,
-          }}
           onProgressChange={progress}
           onSnapToItem={index => {
             setCurrentIndex(index);
           }}
           renderItem={renderItem}
+          customAnimation={animationStyle}
         />
 
         <View style={styles.paginationContainer}>
           {data.map((_, index) => {
             const isActive = currentIndex === index;
             return (
-              <TouchableOpacity
+              <View
                 key={index}
-                onPress={() => onPressPagination(index)}
-              >
-                <View
-                  style={[styles.dotStyle, isActive && styles.activeDotStyle]}
-                />
-              </TouchableOpacity>
+                style={[styles.dotStyle, isActive && styles.activeDotStyle]}
+              />
             );
           })}
         </View>
@@ -127,7 +88,7 @@ const IntroduceCarousel = () => {
   );
 };
 
-export default IntroduceCarousel;
+export default memo(IntroduceCarousel);
 
 const styles = StyleSheet.create({
   container: {
@@ -168,7 +129,7 @@ const styles = StyleSheet.create({
   },
   paginationContainer: {
     gap: parseSizeWidth(6),
-    marginTop: 10,
+    marginTop: parseSizeHeight(10),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

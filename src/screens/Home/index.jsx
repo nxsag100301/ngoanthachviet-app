@@ -13,27 +13,29 @@ import React from 'react';
 import IntroduceCarousel from './components/IntroduceCarousel';
 
 const Index = () => {
-  // const data = [
-  //   {
-  //     id: 1,
-  //     title: 'Nghệ thuật đá Suiseki',
-  //     description:
-  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Nghệ thuật đá Suiseki',
-  //     description:
-  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Nghệ thuật đá Suiseki',
-  //     description:
-  //       'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
-  //   },
-  // ];
-
+  const data = [
+    {
+      id: 1,
+      title: 'Ngoạn Thạch Việt',
+      description:
+        'Hội tụ những người đam mê nghệ thuật đá Suiseki và sưu tầm đá cảnh tại Việt Nam.',
+      image: require('../../assets/images/program.jpg'),
+    },
+    {
+      id: 2,
+      title: 'Nghệ thuật đá Suiseki',
+      description:
+        'Suiseki nghệ thuật chiêm ngưỡng đá tự nhiên, kết hợp hài hòa giữa hình dáng và ý nghĩa.',
+      image: require('../../assets/images/rock.png'),
+    },
+    {
+      id: 3,
+      title: 'Vẻ đẹp tự nhiên',
+      description:
+        'Đá Suiseki tác phẩm nghệ thuật từ thiên nhiên, mang trong mình vẻ đẹp nguyên bản',
+      image: require('../../assets/images/rock3.jpg'),
+    },
+  ];
   return (
     <FlatList
       data={[1, 2, 3, 4]}
@@ -46,7 +48,7 @@ const Index = () => {
       ListHeaderComponent={
         <>
           <HeaderHome />
-          <IntroduceCarousel />
+          <IntroduceCarousel data={data} />
           <ProductSection />
           <Text style={styles.auctionTitle}>Đấu giá</Text>
         </>
