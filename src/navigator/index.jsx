@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Welcome } from '../screens';
+import { DetailProduct, Introduce, Products, Welcome } from '../screens';
 import BottomTab from './BottomTab';
 
 export const navigationRef = createRef();
@@ -20,6 +20,9 @@ const Navigation = () => {
       >
         <Stack.Screen name="welcome" component={Welcome} />
         <Stack.Screen name="bottomTab" component={BottomTab} />
+        <Stack.Screen name="introduce" component={Introduce} />
+        <Stack.Screen name="products" component={Products} />
+        <Stack.Screen name="detailProduct" component={DetailProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );

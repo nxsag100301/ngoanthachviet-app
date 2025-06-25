@@ -4,15 +4,24 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../theme';
+import {
+  Colors,
+  parseSize,
+  parseSizeHeight,
+  parseSizeWidth,
+  Sizes,
+} from '../../theme';
 import HeaderHome from './Section/HeaderHome';
 import ProductSection from './Section/ProductSection';
 import { ProductCard } from '../../conponents';
 import React from 'react';
 import IntroduceCarousel from './components/IntroduceCarousel';
+import { useNavigation } from '@react-navigation/native';
 
 const Index = () => {
+  const navigation = useNavigation();
   const data = [
     {
       id: 1,
@@ -48,6 +57,16 @@ const Index = () => {
       ListHeaderComponent={
         <>
           <HeaderHome />
+          <View style={styles.headerTitle}>
+            <Text style={styles.title}>Giới thiệu</Text>
+            <TouchableOpacity
+              style={styles.moreContainer}
+              onPress={() => navigation.navigate('introduce')}
+            >
+              <Text style={styles.more}>Xem thêm</Text>
+              <Image source={require('../../assets/icons/arrow-right2.png')} />
+            </TouchableOpacity>
+          </View>
           <IntroduceCarousel data={data} />
           <ProductSection />
           <Text style={styles.auctionTitle}>Đấu giá</Text>
@@ -71,21 +90,33 @@ const styles = StyleSheet.create({
   contentContainer: {},
   renderContent: {
     display: 'flex',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: parseSizeWidth(16),
+    paddingVertical: parseSizeHeight(8),
     justifyContent: 'space-between',
   },
   productCard: {
     width: '48%',
+  },
+  headerTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: parseSize(16),
+  },
+  title: {
+    color: Colors.black_900,
+    fontWeight: 600,
+    fontSize: Sizes.text_subtitle1,
+    lineHeight: parseSizeHeight(24),
+    letterSpacing: 0.15,
   },
   moreContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingHorizontal: parseSizeWidth(12),
-    paddingVertical: parseSizeHeight(8),
     gap: parseSizeWidth(6),
+    paddingHorizontal: parseSizeWidth(16),
   },
   more: {
     color: Colors.primary_600,

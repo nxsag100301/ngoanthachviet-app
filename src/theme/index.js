@@ -83,6 +83,10 @@ export const Colors = {
   //Blue
   blue: '#423FFF',
   blue_bg: '#E7E7F6',
+
+  //Green
+  green: '#009800',
+  green_bg: '#EEFFE2',
 };
 
 export const Sizes = {

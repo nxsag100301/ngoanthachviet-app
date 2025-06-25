@@ -25,7 +25,7 @@ const MyButton = ({
       disabled={disabled}
       style={[
         variant === 'outline'
-          ? [styles.containerOutline, { borderColor: backgroundColor }]
+          ? [styles.containerOutline, { borderColor: labelColor }]
           : [styles.containerDefault, { backgroundColor }],
         disabled && styles.disabled,
         style,
@@ -36,7 +36,7 @@ const MyButton = ({
         style={[
           styles.label,
           {
-            color: variant === 'outline' ? backgroundColor : labelColor,
+            color: labelColor,
           },
           labelStyle,
         ]}

@@ -1,16 +1,9 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
-import {
-  Colors,
-  parseSizeHeight,
-  parseSizeWidth,
-  Sizes,
-  Width,
-} from '../../../theme';
-import CardCarousel from './CardCarousel';
 import { memo, useCallback, useRef, useState } from 'react';
-import { useSharedValue } from 'react-native-reanimated';
-import { interpolate } from 'react-native-reanimated';
+import { StyleSheet, View } from 'react-native';
+import { interpolate, useSharedValue } from 'react-native-reanimated';
+import Carousel from 'react-native-reanimated-carousel';
+import { Colors, parseSizeHeight, parseSizeWidth, Width } from '../../../theme';
+import CardCarousel from './CardCarousel';
 
 const IntroduceCarousel = ({ data }) => {
   const ref = useRef(null);
@@ -48,18 +41,10 @@ const IntroduceCarousel = ({ data }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerTitle}>
-        <Text style={styles.title}>Giới thiệu</Text>
-        <TouchableOpacity style={styles.moreContainer}>
-          <Text style={styles.more}>Xem thêm</Text>
-          <Image source={require('../../../assets/icons/arrow-right2.png')} />
-        </TouchableOpacity>
-      </View>
       <View style={styles.carouselContainer}>
         <Carousel
           ref={ref}
           width={Width}
-          style={styles.carousel}
           height={parseSizeHeight(190)}
           data={data}
           pagingEnabled={true}
@@ -94,34 +79,10 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: parseSizeWidth(16),
   },
-  headerTitle: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: parseSizeHeight(16),
-  },
-  title: {
-    color: Colors.black_900,
-    fontWeight: 600,
-    fontSize: Sizes.text_subtitle1,
-    lineHeight: parseSizeHeight(24),
-    letterSpacing: 0.15,
-  },
-  moreContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: parseSizeWidth(6),
-  },
-  more: {
-    color: Colors.primary_600,
-  },
   carouselContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  carousel: {},
   mainContent: {
     justifyContent: 'center',
     width: parseSizeWidth(248),

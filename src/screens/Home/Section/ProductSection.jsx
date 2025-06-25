@@ -16,13 +16,18 @@ import {
   parseSizeWidth,
   Sizes,
 } from '../../../theme';
+import { useNavigation } from '@react-navigation/native';
 
 const ProductSection = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.headerTitle}>
         <Text style={styles.title}>Sản phẩm</Text>
-        <TouchableOpacity style={styles.moreContainer}>
+        <TouchableOpacity
+          style={styles.moreContainer}
+          onPress={() => navigation.navigate('products')}
+        >
           <Text style={styles.more}>Xem thêm</Text>
           <Image source={require('../../../assets/icons/arrow-right2.png')} />
         </TouchableOpacity>
@@ -64,7 +69,6 @@ export default ProductSection;
 
 const styles = StyleSheet.create({
   container: {},
-
   headerTitle: {
     display: 'flex',
     flexDirection: 'row',
@@ -95,7 +99,6 @@ const styles = StyleSheet.create({
     padding: parseSize(16),
   },
   card: {
-    height: parseSizeHeight(265),
     width: parseSizeWidth(145),
   },
   introduceProduct: {

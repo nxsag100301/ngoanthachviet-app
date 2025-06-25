@@ -3,13 +3,19 @@ import React from 'react';
 import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../theme';
 import MyButton from '../Button/MyButton';
 import AuctionTime from '../AuctionTime/AuctionTime';
+import { useNavigation } from '@react-navigation/native';
 
 const ProductCard = ({ productInfo, style, auctionTime }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={[styles.container, style]}>
+    <TouchableOpacity
+      style={[styles.container, style]}
+      onPress={() => navigation.navigate('detailProduct', { productId: 1 })}
+    >
       <Image
         source={require('../../assets/icons/shield-checked.png')}
         style={styles.shieldChecked}
+        resizeMode="contain"
       />
       <Image
         source={require('../../assets/images/logo.png')}
