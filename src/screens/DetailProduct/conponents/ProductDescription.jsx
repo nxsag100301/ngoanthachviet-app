@@ -1,79 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
-import Collapsible from 'react-native-collapsible';
+import { Text, View, StyleSheet } from 'react-native';
 import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../../theme';
+import { MyAccordion } from '../../../conponents';
 
-const AccordionItem = ({ title, children, defaultOpen = false }) => {
-  const [collapsed, setCollapsed] = useState(true);
-
-  useEffect(() => {
-    if (defaultOpen) setCollapsed(false);
-  }, [defaultOpen]);
-
-  const arrowUri = !collapsed
-    ? require('../../../assets/icons/arrow-up.png')
-    : require('../../../assets/icons/arrow-down.png');
-
+const DescriptionLine = ({ title, content }) => {
   return (
-    <View style={styles.accordion}>
-      <TouchableOpacity onPress={() => setCollapsed(!collapsed)}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>{title}</Text>
-          <Image
-            source={arrowUri}
-            style={styles.arrow}
-            tintColor={Colors.gray_400}
-          />
-        </View>
-      </TouchableOpacity>
+    <Text style={styles.contentDescription}>
+      <Text style={styles.titleDescription}>{title}: </Text>
+      {content}
+    </Text>
+  );
+};
 
-      <Collapsible collapsed={collapsed}>
-        <View style={styles.content}>{children}</View>
-      </Collapsible>
+const HistoryDescription = ({ year, content }) => {
+  return (
+    <View style={styles.historyDescriptionContainer}>
+      <Text style={styles.labelYearHistory}>{year}</Text>
+      <View style={styles.historyContentContainer}>
+        <View style={styles.circleIcon} />
+        <Text style={styles.labelContent}>{content}</Text>
+      </View>
     </View>
   );
 };
 
 const ProductDescription = () => {
   return (
-    <View>
-      <AccordionItem title="Thông tin sản phẩm đấu giá" defaultOpen>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Tên sản phẩm:</Text>
-          <Text style={styles.secondContent}>Đá cảnh</Text>
-        </View>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Mã sản phẩm:</Text>
-          <Text style={styles.secondContent}>ĐCSSK032</Text>
-        </View>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Giá khởi điểm:</Text>
-          <Text style={styles.secondContent}>3.000.000 VND</Text>
-        </View>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Bước giá:</Text>
-          <Text style={styles.secondContent}>500.000 VND</Text>
-        </View>
-        <Text style={styles.secondContent}>
-          <Text style={styles.firstContent}>Mô tả: </Text>
-          Là một khối đá tự nhiên 100%, từ dòng đá Canxit Sông Mã, Sơn La. Nó có
+    <View style={styles.container}>
+      <MyAccordion title="Thông tin sản phẩm đấu giá" defaultOpen>
+        <DescriptionLine title="Tên sản phẩm" content="Đá cảnh" />
+        <DescriptionLine title="Mã sản phẩm" content="ĐCSSK032" />
+        <DescriptionLine title="Giá khởi điểm" content="3.000.000 VND" />
+        <DescriptionLine title="Bước giá" content="500.000 VND" />
+        <DescriptionLine
+          title="Mô tả"
+          content="Là một khối đá tự nhiên 100%, từ dòng đá Canxit Sông Mã, Sơn La. Nó có
           hình dáng của một dãy núi hùng vĩ. Trên trên núi có cáo hố như những
           chiếc hồ trên núi. dọc theo sườn núi, có các vân đá màu trắng tựa như
           nước của những dòng suối đang chảy xuống thung lũng bên dưới. Nhìn
           tổng thể thì vên đá như một khung cảnh thu nhỏ của những ngọn núi cao
-          thấp trùng điệp, có hồ, có suối và thung lũng.
-        </Text>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Thông số:</Text>
-          <Text style={styles.secondContent}>
-            Ngang 16cm, Cao 21cm, Sâu 7cm
-          </Text>
+          thấp trùng điệp, có hồ, có suối và thung lũng."
+        />
+        <DescriptionLine
+          title="Thông số"
+          content="Ngang 16cm, Cao 21cm, Sâu 7cm"
+        />
+        <DescriptionLine title="Xuất xứ" content="Việt Nam" />
+        <Text style={styles.titleDescription}>Lịch sử</Text>
+        <View>
+          <HistoryDescription year="2021" content="Được chuyển giao" />
+          <HistoryDescription year="2020" content="Được khai quật bởi" />
         </View>
-        <View style={styles.childContentContainer}>
-          <Text style={styles.firstContent}>Xuất xứ:</Text>
-          <Text style={styles.secondContent}>Việt Nam</Text>
-        </View>
-      </AccordionItem>
+      </MyAccordion>
     </View>
   );
 };
@@ -81,48 +58,55 @@ const ProductDescription = () => {
 export default ProductDescription;
 
 const styles = StyleSheet.create({
-  accordion: {
-    marginTop: parseSizeHeight(8),
+  container: {
+    paddingHorizontal: parseSizeWidth(16),
   },
-  header: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: parseSizeHeight(16),
-  },
-  headerText: {
-    fontSize: Sizes.text_h6,
-    fontWeight: 600,
-    lineHeight: parseSizeHeight(26),
-    letterSpacing: 0.15,
-  },
-  arrow: {
-    height: parseSizeHeight(24),
-    width: parseSizeWidth(24),
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: parseSizeHeight(8),
-  },
-  childContentContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: parseSizeWidth(4),
-  },
-  firstContent: {
+  titleDescription: {
     fontSize: Sizes.text_subtitle1,
     fontWeight: 600,
     lineHeight: parseSizeHeight(22),
     letterSpacing: 0.15,
+    color: Colors.black_900,
   },
-  secondContent: {
+  contentDescription: {
     fontSize: Sizes.text_subtitle1,
     fontWeight: 400,
     lineHeight: parseSizeHeight(22),
     letterSpacing: 0.15,
     textAlign: 'justify',
+    color: Colors.black_400,
+  },
+  historyDescriptionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: parseSizeWidth(12),
+  },
+  historyContentContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: parseSizeWidth(8),
+  },
+  circleIcon: {
+    width: parseSizeWidth(10),
+    height: parseSizeHeight(10),
+    borderRadius: 50,
+    backgroundColor: Colors.primary_600,
+  },
+  labelYearHistory: {
+    fontSize: Sizes.text_tagline1,
+    fontWeight: 400,
+    lineHeight: parseSizeHeight(20),
+    letterSpacing: 0.15,
+    color: Colors.black_400,
+  },
+  labelContent: {
+    fontSize: Sizes.text_subtitle2,
+    fontWeight: 400,
+    lineHeight: parseSizeHeight(22),
+    letterSpacing: 0.15,
+    textAlign: 'justify',
+    color: Colors.black_400,
   },
 });

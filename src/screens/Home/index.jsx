@@ -16,7 +16,6 @@ import {
 import HeaderHome from './Section/HeaderHome';
 import ProductSection from './Section/ProductSection';
 import { ProductCard } from '../../conponents';
-import React from 'react';
 import IntroduceCarousel from './components/IntroduceCarousel';
 import { useNavigation } from '@react-navigation/native';
 
@@ -69,14 +68,17 @@ const Index = () => {
           </View>
           <IntroduceCarousel data={data} />
           <ProductSection />
-          <Text style={styles.auctionTitle}>Đấu giá</Text>
+          <View style={styles.headerAucionTitle}>
+            <Text style={styles.title}>Đấu giá</Text>
+            <TouchableOpacity
+              style={styles.moreContainer}
+              onPress={() => navigation.navigate('auction')}
+            >
+              <Text style={styles.more}>Xem thêm</Text>
+              <Image source={require('../../assets/icons/arrow-right2.png')} />
+            </TouchableOpacity>
+          </View>
         </>
-      }
-      ListFooterComponent={
-        <TouchableOpacity style={styles.moreContainer}>
-          <Text style={styles.more}>Xem thêm</Text>
-          <Image source={require('../../assets/icons/arrow-right2.png')} />
-        </TouchableOpacity>
       }
       contentContainerStyle={styles.contentContainer}
       columnWrapperStyle={styles.renderContent}
@@ -87,7 +89,9 @@ const Index = () => {
 export default Index;
 
 const styles = StyleSheet.create({
-  contentContainer: {},
+  contentContainer: {
+    paddingBottom: parseSizeHeight(8),
+  },
   renderContent: {
     display: 'flex',
     paddingHorizontal: parseSizeWidth(16),
@@ -103,6 +107,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: parseSize(16),
   },
+  headerAucionTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: parseSizeWidth(16),
+    paddingTop: parseSizeHeight(24),
+    paddingBottom: parseSizeHeight(8),
+  },
   title: {
     color: Colors.black_900,
     fontWeight: 600,
@@ -116,7 +128,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     gap: parseSizeWidth(6),
-    paddingHorizontal: parseSizeWidth(16),
   },
   more: {
     color: Colors.primary_600,

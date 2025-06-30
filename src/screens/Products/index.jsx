@@ -15,6 +15,7 @@ const Index = () => {
         keyExtractor={item => item.toString()}
         numColumns={2}
         columnWrapperStyle={styles.wrapperStyle}
+        contentContainerStyle={styles.flatListContainer}
       />
     </View>
   );
@@ -26,6 +27,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: parseSizeWidth(16),
+  },
+  flatListContainer: {
+    marginTop: parseSizeHeight(8),
   },
   wrapperStyle: {
     justifyContent: 'space-between',

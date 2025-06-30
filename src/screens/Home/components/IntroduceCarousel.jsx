@@ -7,8 +7,8 @@ import CardCarousel from './CardCarousel';
 
 const IntroduceCarousel = ({ data }) => {
   const ref = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const progress = useSharedValue(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const progress = useSharedValue(0);
 
   const animationStyle = useCallback(value => {
     'worklet';

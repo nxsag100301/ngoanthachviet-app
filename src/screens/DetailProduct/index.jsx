@@ -1,21 +1,18 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { Colors, parseSizeHeight, parseSizeWidth, Sizes } from '../../theme';
 import CustomHeader from '../../conponents/CustomHeader/CustomHeader';
-import { IdentifyStatus, ProductCard } from '../../conponents';
+import { BottomSheet, IdentifyStatus, ProductCard } from '../../conponents';
 import ImageGallery from './conponents/ImageGallery';
-import BottomSheet from './conponents/BottomSheet';
 import ProductDescription from './conponents/ProductDescription';
+import AnotherProductHeader from './conponents/AnotherProductHeader';
+import AuctionDescription from './conponents/AuctionDescription';
+import Divider from '../../conponents/Divider/Divider';
+import DetailContentBottomSheet from './conponents/DetailContentBottomSheet';
+import AuctionContentBottomSheet from './conponents/AuctionContentBottomSheet';
+import AutionTime from './conponents/AutionTime';
 
-const Index = () => {
-  const navigation = useNavigation();
+const Index = ({ autionTime }) => {
   const route = useRoute();
   const { productId } = route.params;
   return (
@@ -28,30 +25,36 @@ const Index = () => {
         renderItem={() => <ProductCard style={styles.productCard} />}
         numColumns={2}
         columnWrapperStyle={styles.renderContent}
-        contentContainerStyle={styles.flatListContainer}
+        contentContainerStyle={
+          autionTime
+            ? styles.flatListContainerAuction
+            : styles.flatListContainerDetail
+        }
         ListHeaderComponent={
-          <View style={styles.listHeaderContainer}>
-            <ImageGallery />
-            <IdentifyStatus containerStyle={styles.identiftStatus} />
-            <Text style={styles.productName}>Đá cảnh thác chảy</Text>
-            <Text style={styles.price}>123.333.333 VND</Text>
-            <ProductDescription />
-            <View style={styles.headerTitle}>
-              <Text style={styles.title}>Sản phẩm khác</Text>
-              <TouchableOpacity
-                style={styles.moreContainer}
-                onPress={() => navigation.navigate('products')}
-              >
-                <Text style={styles.more}>Xem thêm</Text>
-                <Image
-                  source={require('../../assets/icons/arrow-right2.png')}
-                />
-              </TouchableOpacity>
+          <>
+            <View style={styles.listHeaderContainer}>
+              <ImageGallery />
+              <IdentifyStatus containerStyle={styles.identiftStatus} />
+              <Text style={styles.productName}>Đá cảnh thác chảy</Text>
+              <Text style={styles.price}>123.333.333 VND</Text>
+              <AutionTime />
             </View>
-          </View>
+            <Divider />
+            <ProductDescription />
+            <Divider />
+            <AuctionDescription />
+            <Divider />
+            <AnotherProductHeader />
+          </>
         }
       />
-      <BottomSheet />
+      <BottomSheet>
+        {autionTime ? (
+          <AuctionContentBottomSheet />
+        ) : (
+          <DetailContentBottomSheet />
+        )}
+      </BottomSheet>
     </View>
   );
 };
@@ -69,9 +72,13 @@ const styles = StyleSheet.create({
   listHeaderContainer: {
     paddingHorizontal: parseSizeWidth(16),
     paddingTop: parseSizeHeight(8),
+    paddingBottom: parseSizeHeight(16),
   },
-  flatListContainer: {
+  flatListContainerDetail: {
     paddingBottom: parseSizeHeight(124),
+  },
+  flatListContainerAuction: {
+    paddingBottom: parseSizeHeight(224),
   },
   identiftStatus: {
     width: parseSizeWidth(291),
@@ -90,6 +97,7 @@ const styles = StyleSheet.create({
     lineHeight: parseSizeHeight(24),
     letterSpacing: 0.15,
     color: Colors.primary_700,
+    paddingBottom: parseSizeHeight(16),
   },
   productCard: {
     width: '48%',
@@ -99,28 +107,5 @@ const styles = StyleSheet.create({
     paddingVertical: parseSizeHeight(8),
     paddingHorizontal: parseSizeWidth(16),
     justifyContent: 'space-between',
-  },
-  headerTitle: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: parseSizeHeight(16),
-  },
-  title: {
-    color: Colors.black_900,
-    fontWeight: 600,
-    fontSize: Sizes.text_subtitle1,
-    lineHeight: parseSizeHeight(24),
-    letterSpacing: 0.15,
-  },
-  moreContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: parseSizeWidth(6),
-  },
-  more: {
-    color: Colors.primary_600,
   },
 });
